@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+---
+builds:
+  - binary: vied
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    env:
+      - CGO_ENABLED=1
+
+checksum:
+  name_template: "checksums.txt"
+  algorithm: sha256
+
+release:
+  prerelease: auto
+
+universal_binaries:
+  - replace: false
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+brews:
+  - name: vied
+    homepage: https://github.com/Frank-Mayer/vied
+    description: Visual Editor
+    repository:
+      owner: Frank-Mayer
+      name: homebrew-tap
+    commit_author:
+      name: Frank-Mayer
+      email: gh@frankmayer.dev
